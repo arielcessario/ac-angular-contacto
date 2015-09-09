@@ -1,0 +1,33 @@
+<div class="contact">
+    <div class="contact-title">Contacto</div>
+
+    <div class="contact-info">Por favor, complete nuestro siguiente formulario de contacto. Le responderemos a la brevedad.</div>
+
+    <div class="contact-container">
+        <input type="email" pattern="[^ @]*@[^ @]*"
+               ng-model="contactoCtrl.mail" placeholder="Mail"
+               ng-class="{'error': contactoCtrl.mailError == 1, 'warning': contactoCtrl.mailWarning == 2}">
+        <label ng-if="contactoCtrl.mail_error.length > 0" class="message-error">{{contactoCtrl.mail_error}}</label>
+
+        <input type="text"
+               ng-model="contactoCtrl.name" placeholder="Nombre"
+               ng-class="{'error': contactoCtrl.nameError == 1}">
+        <label ng-if="contactoCtrl.name_error.length > 0" class="message-error">{{contactoCtrl.name_error}}</label>
+
+        <input type="text"
+               ng-model="contactoCtrl.subject" placeholder="Asunto"
+               ng-class="{'error': contactoCtrl.subjectError == 1}">
+        <label ng-if="contactoCtrl.subject_error.length > 0" class="message-error">{{contactoCtrl.subject_error}}</label>
+
+        <textarea placeholder="Consulta..." rows="4" cols="50"
+                  ng-model="contactoCtrl.comment"
+                  ng-class="{'error': contactoCtrl.commentError == 1}"></textarea>
+        <label ng-if="contactoCtrl.comment_error.length > 0" class="message-error">{{contactoCtrl.comment_error}}</label>
+
+        <input type="button" class="btn-primary" ng-click="contactoCtrl.sendMail();" value="ENVIAR">
+
+        <label ng-if="contactoCtrl.showMessage == 1" class="message-error">{{contactoCtrl.message}}</label>
+
+        <label class="message">{{contactoCtrl.message_info}}</label>
+    </div>
+</div>

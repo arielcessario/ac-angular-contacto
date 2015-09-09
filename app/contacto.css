@@ -1,0 +1,61 @@
+/* line 213, ../sass/bosch.scss */
+.contact {
+    width: 100%;
+    height: 600px;
+    background-color: #555555;
+}
+/* line 218, ../sass/bosch.scss */
+.contact .contact-info {
+    text-align: center;
+    color: #fff;
+}
+.contact .contact-title {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 3.5em;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+@media (max-width: 600px) {
+    /* line 213, ../sass/bosch.scss */
+    .contact {
+        background-color: #1D1D1B;
+    }
+}
+
+/* line 227, ../sass/bosch.scss */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    padding-top: 20px;
+}
+input, input[type="password"], input[type="search"], input[type="text"], input[type="email"], textarea {
+    width: 30%;
+}
+@media (max-width: 600px) {
+    /* line 237, ../sass/bosch.scss */
+    .contact-container input, .contact-container input[type="password"], .contact-container input[type="search"], .contact-container input[type="text"], .contact-container input[type="mail"], .contact-container textarea {
+        width: 70%;
+    }
+    /* line 240, ../sass/bosch.scss */
+    .contact-container input[type="button"], .contact-container input[type="submit"] {
+        width: 75%;
+    }
+}
+.message-error{
+    color:#fff;
+    font-size: 10px;
+    font-weight: bold;
+}
+.error {
+    border: 1px solid red;
+}
+.warning {
+    border: 1px solid orange;
+}
