@@ -26,8 +26,6 @@
 
         <input type="button" class="btn-primary" ng-click="contactoCtrl.sendMail();" value="ENVIAR">
 
-        <label ng-if="contactoCtrl.showMessage == 1" class="message-error">{{contactoCtrl.message}}</label>
-
-        <label class="message">{{contactoCtrl.message_info}}</label>
+        <label ng-if="contactoCtrl.showMessage == 1" class="contact-message">{{contactoCtrl.message}}</label>
     </div>
 </div>

@@ -12,9 +12,9 @@
         .factory('acAngularContactoService', AcAngularContactoService);
 
 
-    AcAngularContacto.$inject = ['$location', '$route', 'acAngularContactoService'];
+    AcAngularContacto.$inject = ['$location', '$route', '$timeout', 'acAngularContactoService'];
 
-    function AcAngularContacto($location, $route, acAngularContactoService) {
+    function AcAngularContacto($location, $route, $timeout, acAngularContactoService) {
         return {
             restrict: 'E',
             scope: {
@@ -32,7 +32,6 @@
                 vm.message = '';
 
                 //Mensajes
-                vm.message_info = '';
                 vm.mail_error = '';
                 vm.name_error = '';
                 vm.subject_error = '';
@@ -131,11 +130,27 @@
                     vm.commentError = 0;
                 }
 
+                function cleanInputs() {
+                    vm.mail = '';
+                    vm.name = '';
+                    vm.subject = '';
+                    vm.comment = '';
+                }
+
                 /*******************************************************************/
                 /**
-                 * Envia mail con la consulta
+                 *
                  */
-                function sendMail(){
+                function hideMessage(){
+                    vm.showMessage = 0;
+                    cleanInputs();
+                }
+
+                /**
+                 * Envia mail con la consulta
+                 * @param to: Destinatario del mail
+                 */
+                function sendMail(to){
                     if((vm.subject.trim().length > 0) && (vm.name.trim().length > 0) && (vm.comment.trim().length > 0)
                     && (vm.mail != undefined && vm.mail.trim().length > 0)) {
                         //Valida que el mail ingresado sea valido
@@ -145,13 +160,15 @@
                             vm.mailError = 0;
                             vm.mailWarning = 0;
 
-                            var to = 'mmaneff@gmail.com';
                             acAngularContactoService.sendMail(to, vm.subject.trim(), vm.comment.trim(), vm.mail.trim(), function(data){
                                 vm.showMessage = 1;
-                                if(data)
+                                if(data) {
                                     vm.message = 'Su consulta fue enviada';
-                                else
+                                    $timeout(hideMessage, 3000);
+                                }
+                                else {
                                     vm.message = 'Se produjo un error al enviar su consulta';
+                                }
                             });
                         }
                         else {
@@ -173,8 +190,16 @@
         }
     }
 
+    /*****************************************************************************************************/
+
     AcAngularContactoService.$inject = ['$http'];
 
+    /**
+     * Servicio de contacto para envio de mails
+     * @param $http
+     * @returns {{}}
+     * @constructor
+     */
     function AcAngularContactoService($http) {
         //Variables
         var service = {};
